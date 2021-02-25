@@ -12,6 +12,7 @@ class App extends React.Component{
         }}
         > 
         <Text> Hello world! Git! </Text>
+        <Text> Hello world! Git! </Text>
       </View>
     )
   }
