@@ -1,61 +1,58 @@
-import React, {useState} from "react"
-import { Text, View, TextInput } from "react-native";
-import Button from "./components/Button";
-import Counter from "./components/Counter";
+import React from 'react';
+import {Text, View, TextInput} from 'react-native';
+import Button from './components/Button';
+import Counter from './components/Counter';
 
 class App extends React.Component {
   state = {
-    count: 0,
-    userName:"",
-    userAge:0
-  }
+    userName: '',
+    userAge: '',
+    user: '',
+  };
 
-  increase = () => {
-    this.setState({ count: this.state.count + 1})
-  }
+  submit = () => {
+    this.setState({user: `${this.state.userName}, ${this.state.userAge}`});
+  };
 
+  updateUserName = (userName) => {
+    this.setState({userName});
+  };
 
-  updateUserName = (inputText) => {  
-    this.setState({ userName: inputText })  
-  }  
-  
-  updateUserAge = (inputText) => {  
-    this.setState({ userAge: inputText })  
-  } 
+  updateUserAge = (userAge) => {
+    this.setState({userAge});
+  };
 
   render() {
-    console.log(this.state.count)
-
     return (
       <View
         style={{
           flex: 1,
-          justifyContent: "center",
-          alignItems: "center"
-        }}
-      >
-      {this.state.count == 0 && 
-      (<TextInput
-        onChangeText={this.updateUserName}
-        placeholder={'UserName'}
-        style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-      />)}
-      {this.state.count == 0 && 
-      (<TextInput
-        onChangeText={this.updateUserAge}
-        placeholder={'UserAge'}
-        style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-      />)}
-      
-      {this.state.count > 0 &&
-      (<Text style={{color: 'blue'}}>{this.state.userName}</Text>)}
-      {this.state.count > 0 &&
-      (<Text style={{color: 'blue'}}>{this.state.userAge}</Text>)}
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        {!this.state.user && (
+          <>
+            <Text>Name</Text>
+            <TextInput
+              onChangeText={this.updateUserName}
+              placeholder={'UserName'}
+              style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+            />
 
-        {/* {this.state.count <= 7 && (<Counter count={this.state.count}/>)} */}
-      <Button increase={this.increase}/>
+            <Text>Age</Text>
+            <TextInput
+              onChangeText={this.updateUserAge}
+              placeholder={'UserAge'}
+              style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+            />
+
+            <Button increase={this.submit} />
+          </>
+        )}
+
+        {!!this.state.user && <Text>{this.state.user}</Text>}
       </View>
-    )
+    );
   }
 }
 
