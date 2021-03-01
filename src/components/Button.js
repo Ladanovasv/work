@@ -5,7 +5,7 @@ class Button extends React.Component {
     render() {
         return (
             <TouchableOpacity onPress={this.props.increase}>
-                <Text>Press me</Text>
+                <Text>Done</Text>
             </TouchableOpacity>
         )
     }
