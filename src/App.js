@@ -1,84 +1,78 @@
 import React from 'react';
-import {Text, View, Image} from 'react-native';
+import { Text, View, Image, ScrollView, FlatList } from 'react-native';
 import ButtonPrev from './components/ButtonPrev';
 import ButtonNext from './components/ButtonNext';
 
 class App extends React.Component {
-  container = [
+
+
+  state = {
+    images: [
       {
         id: 0,
-        image:'http://silver.ru/LoadedFiles/zzzz/78/13.1.jpg',
-        title:'Аксолотль'
+        url: 'http://silver.ru/LoadedFiles/zzzz/78/13.1.jpg',
+        title: 'Аксолотль'
       },
       {
         id: 1,
-        image:'http://silver.ru/LoadedFiles/zzzz/78/5.jpg',
-        title:'Носач'
+        url: 'http://silver.ru/LoadedFiles/zzzz/78/5.jpg',
+        title: 'Носач'
       },
       {
         id: 2,
-        image:'http://silver.ru/LoadedFiles/zzzz/78/6.1.jpg',
-        title:'Белолицый саки'
+        url: 'http://silver.ru/LoadedFiles/zzzz/78/6.1.jpg',
+        title: 'Белолицый саки'
       },
       {
         id: 3,
-        image:'http://silver.ru/LoadedFiles/zzzz/78/9.1.jpg',
-        title:'Ринопитеки'
+        url: 'http://silver.ru/LoadedFiles/zzzz/78/9.1.jpg',
+        title: 'Ринопитеки'
       },
       {
         id: 4,
-        image:'http://silver.ru/LoadedFiles/zzzz/78/12.jpg',
-        title:'Венгерская овчарка \n комондор'
+        url: 'http://silver.ru/LoadedFiles/zzzz/78/12.jpg',
+        title: 'Венгерская овчарка \n комондор'
       }
-    ];
-
-  state = {
-    id: 0 
+    ]
   };
 
-
-  onPressPrev = (id) => {
-    this.setState({id: this.state.id - 1});
-  };
-
-  onPressNext = (id) => {
-    this.setState({id: this.state.id + 1});
-  };
 
   render() {
-    let {id} = this.state;
+    const { images } = this.state;
+
+    const renderItem = ({ item }) => (
+      <View>
+      <Image
+        style={{
+          width: 400,
+          height: 400
+        }}
+        source={{
+          uri: item.url
+        }} />
+      <Text
+        style={{
+          fontSize: 40,
+          textAlign: "center",
+          paddingBottom: 25
+        }}
+      >
+        {item.title}
+      </Text>
+    </View>
+    );
 
     return (
-      <View
+      <ScrollView
         style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
+          flex: 1
         }}>
-        
-        <Image
-          style={{
-            width: 300,
-            height: 300,
-          }}
-          source={{uri: this.container[id].image}}
+        <FlatList
+          data={images}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
         />
-        <Text
-          style={{ 
-            fontSize: 30,
-            fontWeight: "bold"
-          }}
-        >{this.container[id].title}</Text>
-        <View
-          style={{
-            flexDirection: "row"
-          }}
-        >
-          {this.state.id > 0 && <ButtonPrev onPressPrev={this.onPressPrev} />}
-          {this.state.id < 4 && <ButtonNext onPressNext={this.onPressNext} />}           
-        </View>
- 
-      </View>
+      </ScrollView>
     );
   }
 }
