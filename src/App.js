@@ -1,7 +1,7 @@
 import React from 'react';
-import { Text, View, Image, ScrollView, FlatList } from 'react-native';
-import ButtonPrev from './components/ButtonPrev';
-import ButtonNext from './components/ButtonNext';
+import {FlatList } from 'react-native';
+import ItemImageTitle from './components/ItemImageTitle';
+
 
 class App extends React.Component {
 
@@ -41,38 +41,17 @@ class App extends React.Component {
     const { images } = this.state;
 
     const renderItem = ({ item }) => (
-      <View>
-      <Image
-        style={{
-          width: 400,
-          height: 400
-        }}
-        source={{
-          uri: item.url
-        }} />
-      <Text
-        style={{
-          fontSize: 40,
-          textAlign: "center",
-          paddingBottom: 25
-        }}
-      >
-        {item.title}
-      </Text>
-    </View>
+      <ItemImageTitle item={item} />
     );
 
     return (
-      <ScrollView
-        style={{
-          flex: 1
-        }}>
+      
         <FlatList
           data={images}
           renderItem={renderItem}
           keyExtractor={item => item.id}
         />
-      </ScrollView>
+      
     );
   }
 }
