@@ -1,9 +1,10 @@
 import React from 'react';
-import {Image, Text, View} from 'react-native';
+import {Image, Text, View, Dimensions} from 'react-native';
 
 class ItemImageTitle extends React.Component {
   render() {
-    const {width, height, item} = this.props;
+    const {item} = this.props;
+    const {width, height} = Dimensions.get('window');
     console.log(item);
     return (
       <View

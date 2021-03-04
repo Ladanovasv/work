@@ -3,7 +3,7 @@ import {TouchableOpacity, Text} from 'react-native';
 
 class ButtonCategory extends React.Component {
   render() {
-    const {category, index} = this.props;
+    const {category, index, updateSelectedCategory} = this.props;
     return (
       <TouchableOpacity
         style={{

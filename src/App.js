@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, Dimensions} from 'react-native';
+import {FlatList} from 'react-native';
 import ItemImageTitle from './components/ItemImageTitle';
 import HeaderCategories from './components/HeaderCategories';
 
@@ -37,25 +37,31 @@ class App extends React.Component {
         category: 'Собаки',
       },
     ],
-    uniqueCategories: ['Земноводные', 'Обезьяны', 'Собаки', 'Кошки'],
+    uniqueCategories: ['Земноводные', 'Обезьяны', 'Собаки'],
+    selectCategory: 'Земноводные',
   };
 
   render() {
-    const {images, uniqueCategories} = this.state;
-    const {width, height} = Dimensions.get('window');
+    const {images, uniqueCategories, selectCategory} = this.state;
 
-    const renderItem = ({item}) => (
-      <ItemImageTitle item={item} width={width} height={height} />
+    let selectedCategory = images.filter(
+      (item) => item.category == selectCategory,
     );
+
+    const renderItem = ({item}) => <ItemImageTitle item={item} />;
+
+    const updateSelectedCategory = (selectCategory) => {
+      this.setState({selectCategory});
+    };
 
     return (
       <FlatList
-        data={images}
+        data={selectedCategory}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
-        // ListHeaderComponent={
-        //   <HeaderCategories uniqueCategories={uniqueCategories} />
-        // }
+        ListHeaderComponent={
+          <HeaderCategories uniqueCategories={uniqueCategories} />
+        }
       />
     );
   }
