@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList} from 'react-native';
+import {FlatList, View, Text} from 'react-native';
 import ItemImageTitle from './components/ItemImageTitle';
 import HeaderCategories from './components/HeaderCategories';
 
@@ -37,22 +37,25 @@ class App extends React.Component {
         category: 'Собаки',
       },
     ],
-    uniqueCategories: ['Земноводные', 'Обезьяны', 'Собаки'],
-    selectCategory: 'Земноводные',
+    uniqueCategories: ['Земноводные', 'Обезьяны', 'Собаки', 'Кошки'],
+    activeCategory: 'Земноводные'
   };
 
+
+  updateSelectedCategory = (activeCategory) => {
+      this.setState({activeCategory});
+    };
+
   render() {
-    const {images, uniqueCategories, selectCategory} = this.state;
+    const {images, uniqueCategories, activeCategory} = this.state;
 
     let selectedCategory = images.filter(
-      (item) => item.category == selectCategory,
+      (item) => item.category == activeCategory,
     );
 
     const renderItem = ({item}) => <ItemImageTitle item={item} />;
 
-    const updateSelectedCategory = (selectCategory) => {
-      this.setState({selectCategory});
-    };
+    
 
     return (
       <FlatList
@@ -60,8 +63,14 @@ class App extends React.Component {
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         ListHeaderComponent={
-          <HeaderCategories uniqueCategories={uniqueCategories} />
+          <HeaderCategories uniqueCategories={uniqueCategories}
+          updateSelectedCategory = {this.updateSelectedCategory}
+          activeCategory = {activeCategory}
+           />
         }
+        ListEmptyComponent={<View style={{ height: 300, justifyContent: 'center', alignItems: 'center'}}>
+                    <Text>Ничего не найдено :(</Text>
+                </View>}
       />
     );
   }

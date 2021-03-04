@@ -3,7 +3,7 @@ import {TouchableOpacity, Text} from 'react-native';
 
 class ButtonCategory extends React.Component {
   render() {
-    const {category, index, updateSelectedCategory} = this.props;
+    const {category, onPress} = this.props;
     return (
       <TouchableOpacity
         style={{
@@ -13,7 +13,8 @@ class ButtonCategory extends React.Component {
           borderRadius: 80,
           backgroundColor: '#eaeaea',
           margin: 5,
-        }}>
+        }}
+        onPress={onPress}>
         <Text
           style={{
             fontSize: 15,
