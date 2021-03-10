@@ -3,7 +3,7 @@ import {TouchableOpacity, Text} from 'react-native';
 
 class ButtonCategory extends React.Component {
   render() {
-    const {category, onPress} = this.props;
+    const {category, onPress, isActive} = this.props;
     return (
       <TouchableOpacity
         style={{
@@ -11,7 +11,7 @@ class ButtonCategory extends React.Component {
           paddingLeft: 15,
           paddingRight: 15,
           borderRadius: 80,
-          backgroundColor: '#eaeaea',
+          backgroundColor: isActive ? '#aeafb7' : '#eaeaea',
           margin: 5,
         }}
         onPress={onPress}>

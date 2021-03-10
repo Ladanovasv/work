@@ -5,7 +5,6 @@ class ItemImageTitle extends React.Component {
   render() {
     const {item} = this.props;
     const {width, height} = Dimensions.get('window');
-    console.log(item);
     return (
       <View
         style={{
