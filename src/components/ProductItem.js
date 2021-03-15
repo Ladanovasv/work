@@ -16,6 +16,9 @@ class ProductItem extends React.Component {
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'space-between',
+          padding: 5,
+          borderBottomWidth: 1,
+          borderColor: 'black',
         }}>
         <CheckBox
           style={{
@@ -25,13 +28,20 @@ class ProductItem extends React.Component {
           onValueChange={() => {
             selectProduct(item, item.isSelected ? false : true);
           }}
+          tintColors={{true: '#989ca6', false: '#989ca6'}}
+          boxType="circle"
         />
 
         <View
           style={{
             flex: 8,
           }}>
-          <Text>{item.name}</Text>
+          <Text
+            style={{
+              fontSize: 20,
+            }}>
+            {item.name}
+          </Text>
         </View>
 
         <DeleteProductItemButton onPress={onPress} />

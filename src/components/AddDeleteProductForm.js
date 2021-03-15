@@ -23,29 +23,36 @@ class AddDeleteProductForm extends React.Component {
         style={{
           flex: 1,
           justifyContent: 'center',
+          backgroundColor: '#fffcf9',
         }}>
         <View
           style={{
-            flex: 12,
+            flex: 16,
             justifyContent: 'flex-end',
+            paddingTop: 20,
+            paddingLeft: 10,
+            paddingRight: 10,
           }}>
           <ProductsList
             products={products}
             deleteProduct={deleteProduct}
             selectProduct={selectProduct}
           />
+        </View>
+
+        <AddProductForm
+          addProduct={addProduct}
+          updateNameProduct={updateNameProduct}
+        />
+        <View
+          style={{
+            position: 'absolute',
+            left: width - 60,
+            bottom: height * 0.11,
+          }}>
           {!!products.length && countCheckedProducts == products.length && (
             <DeleteAllProductsButton deleteAllProducts={deleteAllProducts} />
           )}
-        </View>
-        <View
-          style={{
-            flex: 1,
-          }}>
-          <AddProductForm
-            addProduct={addProduct}
-            updateNameProduct={updateNameProduct}
-          />
         </View>
       </View>
     );

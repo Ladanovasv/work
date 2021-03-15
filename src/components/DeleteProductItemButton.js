@@ -5,13 +5,25 @@ class DeleteProductItemButton extends React.Component {
   render() {
     const {onPress} = this.props;
     return (
-      <TouchableOpacity style={{flex: 2}} onPress={onPress}>
-        <View
+      <TouchableOpacity
+        style={{
+          height: 25,
+          width: 25,
+          backgroundColor: '#989ca6',
+          borderRadius: 50,
+          alignItems: 'center',
+          justifyContent: 'center',
+          paddingBottom: 3,
+        }}
+        onPress={onPress}>
+        <Text
           style={{
-            alignItems: 'center',
+            fontSize: 16,
+            textAlign: 'center',
+            color: 'white',
           }}>
-          <Text> Delete </Text>
-        </View>
+          ✖
+        </Text>
       </TouchableOpacity>
     );
   }

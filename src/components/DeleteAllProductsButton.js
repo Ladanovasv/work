@@ -11,16 +11,19 @@ class DeleteAllProductsButton extends React.Component {
           deleteAllProducts();
         }}
         style={{
-          position: 'absolute',
-          width: '40%',
+          height: 50,
+          width: 50,
+          borderRadius: 25,
+          backgroundColor: '#fd5200',
         }}>
         <Text
           style={{
-            fontSize: 25,
+            fontSize: 35,
             textAlign: 'center',
-            padding: 8,
+            padding: 3,
+            color: 'white',
           }}>
-          ZZZZZZZZ
+          ✓
         </Text>
       </TouchableOpacity>
     );

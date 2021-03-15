@@ -1,9 +1,16 @@
 import React from 'react';
-import {Text, TextInput, View, TouchableOpacity} from 'react-native';
+import {
+  Text,
+  TextInput,
+  View,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 
 class AddProductForm extends React.Component {
   render() {
     const {addProduct, updateNameProduct} = this.props;
+    const {height} = Dimensions.get('window');
 
     onPress = () => {
       addProduct();
@@ -14,14 +21,42 @@ class AddProductForm extends React.Component {
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'space-between',
+          height: height * 0.09,
+          backgroundColor: '#fafafa',
+          padding: 5,
         }}>
         <TextInput
-          style={{flex: 10}}
+          style={{
+            flex: 6,
+            borderRadius: 25,
+            paddingLeft: 25,
+            paddingRight: 25,
+            marginHorizontal: 10,
+            fontSize: 20,
+            backgroundColor: '#ffffff',
+            borderColor: '#ececec',
+            borderWidth: 1,
+          }}
           onChangeText={updateNameProduct}
-          placeholder={'Input name product'}
         />
-        <TouchableOpacity style={{flex: 2}} onPress={onPress}>
-          <Text>Add</Text>
+
+        <TouchableOpacity
+          style={{
+            height: 50,
+            width: 50,
+
+            borderRadius: 25,
+            backgroundColor: '#fd5200',
+          }}
+          onPress={onPress}>
+          <Text
+            style={{
+              fontSize: 35,
+              textAlign: 'center',
+              color: 'white',
+            }}>
+            +
+          </Text>
         </TouchableOpacity>
       </View>
     );
