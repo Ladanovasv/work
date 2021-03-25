@@ -25,19 +25,18 @@ class ProductsList extends React.Component {
             style={{
               height: height * 0.09,
               width: '100%',
-              backgroundColor: '#fd5200',
+              backgroundColor: '#f75d5d',
               alignItems: 'center',
               justifyContent: 'center',
-              borderTopLeftRadius: 25,
-              borderTopRightRadius: 25,
+              borderTopLeftRadius: 10,
+              borderTopRightRadius: 10,
             }}>
             <Text
               style={{
                 fontSize: 40,
-                color: 'black',
+                color: 'white',
               }}>
-              {' '}
-              Список покупок{' '}
+              Список покупок
             </Text>
           </View>
         }

@@ -24,6 +24,9 @@ class AddProductForm extends React.Component {
           height: height * 0.09,
           backgroundColor: '#fafafa',
           padding: 5,
+          elevation: 18,
+          zIndex: 1,
+          borderRadius: 10,
         }}>
         <TextInput
           style={{
@@ -44,9 +47,8 @@ class AddProductForm extends React.Component {
           style={{
             height: 50,
             width: 50,
-
             borderRadius: 25,
-            backgroundColor: '#fd5200',
+            backgroundColor: '#f75d5d',
           }}
           onPress={onPress}>
           <Text

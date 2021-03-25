@@ -14,7 +14,7 @@ class DeleteAllProductsButton extends React.Component {
           height: 50,
           width: 50,
           borderRadius: 25,
-          backgroundColor: '#fd5200',
+          backgroundColor: '#f75d5d',
         }}>
         <Text
           style={{
