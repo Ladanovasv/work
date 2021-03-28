@@ -22,7 +22,7 @@ class ListCategories extends React.Component {
       <FlatList
         data={activeCategory ? selectedCategory : images}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => String(item.id)}
         ListHeaderComponent={
           <HeaderCategories
             uniqueCategories={uniqueCategories}

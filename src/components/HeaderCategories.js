@@ -17,6 +17,7 @@ class HeaderCategories extends React.Component {
 
           return (
             <ButtonCategory
+              key={category}
               category={category}
               isActive={isActive}
               onPress={() => {
