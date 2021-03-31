@@ -26,7 +26,7 @@ class ProductItem extends React.Component {
           }}
           value={item.isSelected}
           onValueChange={() => {
-            selectProduct(item, item.isSelected ? false : true);
+            selectProduct(item);
           }}
           tintColors={{true: '#989ca6', false: '#989ca6'}}
           boxType="circle"

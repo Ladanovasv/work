@@ -9,7 +9,7 @@ import {
 
 class AddProductForm extends React.Component {
   render() {
-    const {addProduct, updateNameProduct} = this.props;
+    const {addProduct, updateNameProduct, productName} = this.props;
     const {height} = Dimensions.get('window');
 
     onPress = () => {
@@ -41,6 +41,7 @@ class AddProductForm extends React.Component {
             borderWidth: 1,
           }}
           onChangeText={updateNameProduct}
+          value={productName}
         />
 
         <TouchableOpacity

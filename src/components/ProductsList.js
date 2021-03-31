@@ -4,7 +4,7 @@ import ProductItem from './ProductItem';
 
 class ProductsList extends React.Component {
   render() {
-    const {products, deleteProduct, selectProduct} = this.props;
+    const {shoppingList, deleteProduct, selectProduct} = this.props;
     const {height} = Dimensions.get('window');
 
     const renderItem = ({item}) => (
@@ -17,7 +17,7 @@ class ProductsList extends React.Component {
 
     return (
       <FlatList
-        data={products}
+        data={shoppingList}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         ListHeaderComponent={

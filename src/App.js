@@ -1,12 +1,40 @@
 import React from 'react';
-import AddDeleteProductForm from './components/AddDeleteProductForm';
-
+import ShoppingListAppForm from './components/ShoppingListAppForm';
+import {createProduct} from './utils';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 class App extends React.Component {
   state = {
-    products: [],
-    id: 0,
-    countCheckedProducts: 0,
+    shoppingList: [],
     nameProduct: '',
+  };
+
+  componentDidMount() {
+    this.init();
+  }
+
+  init = async () => {
+    try {
+      const persistedState = await AsyncStorage.getItem('shoppingList');
+      if (!persistedState) return;
+      this.setState({
+        shoppingList: JSON.parse(persistedState),
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  persistState = (newState) => {
+    this.setState(newState, async () => {
+      try {
+        await AsyncStorage.setItem(
+          'shoppingList',
+          JSON.stringify(this.state.shoppingList),
+        );
+      } catch (e) {
+        console.error(e);
+      }
+    });
   };
 
   updateNameProduct = (nameProduct) => {
@@ -14,69 +42,57 @@ class App extends React.Component {
   };
 
   addProduct = () => {
-    let product = {
-      id: 'id' + this.state.id,
-      name: this.state.nameProduct,
-      isSelected: false,
-    };
-    this.state.products.push(product);
-    this.setState({
-      id: this.state.id + 1,
+    let newShoppingList = [...this.state.shoppingList];
+    newShoppingList.push(createProduct(this.state.nameProduct));
+    this.persistState({
+      shoppingList: newShoppingList,
+      nameProduct: '',
     });
   };
 
   deleteProduct = (product) => {
-    index = this.state.products.findIndex(
-      (itemProduct) => itemProduct.id == product.id,
-    );
-
-    index == -1
-      ? console.log('Error not found product for delete')
-      : this.state.products.splice(index, 1);
-
-    product.isSelected
-      ? this.setState({
-          countCheckedProducts: this.state.countCheckedProducts - 1,
-        })
-      : this.setState({
-          countCheckedProducts: this.state.countCheckedProducts,
-        });
-  };
-
-  deleteAllProducts = () => {
-    this.state.products.splice(0, this.state.products.length);
-    this.setState({
-      id: 0,
-      countCheckedProducts: 0,
+    const index = this.getProductIndexById(product.id);
+    let newShoppingList = [...this.state.shoppingList];
+    newShoppingList.splice(index, 1);
+    this.persistState({
+      shoppingList: newShoppingList,
     });
   };
 
-  selectProduct = (product, isSelect) => {
-    index = this.state.products.findIndex(
-      (itemProduct) => itemProduct.id == product.id,
-    );
-    index == -1
-      ? console.log({index})
-      : (this.state.products[index].isSelected = isSelect);
+  deleteAllProducts = () => {
     this.setState({
-      countCheckedProducts: isSelect
-        ? this.state.countCheckedProducts + 1
-        : this.state.countCheckedProducts - 1,
+      shoppingList: [],
+    });
+  };
+
+  selectProduct = (product) => {
+    const {shoppingList} = this.state;
+    const selected =
+      shoppingList[this.getProductIndexById(product.id)].isSelected;
+
+    shoppingList[this.getProductIndexById(product.id)].isSelected = !selected;
+
+    this.setState({shoppingList});
+  };
+
+  getProductIndexById = (id) => {
+    return this.state.shoppingList.findIndex((itemProduct) => {
+      return itemProduct.id === id;
     });
   };
 
   render() {
-    const {products, countCheckedProducts} = this.state;
+    const {shoppingList, nameProduct} = this.state;
 
     return (
-      <AddDeleteProductForm
-        products={products}
+      <ShoppingListAppForm
+        shoppingList={shoppingList}
         addProduct={this.addProduct}
         deleteProduct={this.deleteProduct}
         deleteAllProducts={this.deleteAllProducts}
         updateNameProduct={this.updateNameProduct}
         selectProduct={this.selectProduct}
-        countCheckedProducts={countCheckedProducts}
+        productName={nameProduct}
       />
     );
   }

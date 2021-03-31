@@ -4,19 +4,30 @@ import ProductsList from './ProductsList';
 import AddProductForm from './AddProductForm';
 import DeleteAllProductsButton from './DeleteAllProductsButton';
 
-class AddDeleteProductForm extends React.Component {
+class ShoppingListAppForm extends React.Component {
   render() {
     const {
-      products,
+      shoppingList,
       addProduct,
       deleteProduct,
       deleteAllProducts,
       updateNameProduct,
       selectProduct,
-      countCheckedProducts,
+      productName,
     } = this.props;
 
     const {width, height} = Dimensions.get('window');
+
+    const countSelectedProducts = shoppingList.reduce((prev, product) => {
+      if (product.isSelected) {
+        return prev + 1;
+      } else {
+        return prev;
+      }
+    }, 0);
+
+    const allSelected =
+      countSelectedProducts === shoppingList.length && shoppingList.length > 0;
 
     return (
       <View
@@ -34,7 +45,7 @@ class AddDeleteProductForm extends React.Component {
             paddingRight: 10,
           }}>
           <ProductsList
-            products={products}
+            shoppingList={shoppingList}
             deleteProduct={deleteProduct}
             selectProduct={selectProduct}
           />
@@ -43,6 +54,7 @@ class AddDeleteProductForm extends React.Component {
         <AddProductForm
           addProduct={addProduct}
           updateNameProduct={updateNameProduct}
+          productName={productName}
         />
         <View
           style={{
@@ -50,7 +62,7 @@ class AddDeleteProductForm extends React.Component {
             left: width - 60,
             bottom: height * 0.11,
           }}>
-          {!!products.length && countCheckedProducts == products.length && (
+          {allSelected && (
             <DeleteAllProductsButton deleteAllProducts={deleteAllProducts} />
           )}
         </View>
@@ -59,4 +71,4 @@ class AddDeleteProductForm extends React.Component {
   }
 }
 
-export default AddDeleteProductForm;
+export default ShoppingListAppForm;
