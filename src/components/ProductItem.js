@@ -6,7 +6,7 @@ import DeleteProductItemButton from './DeleteProductItemButton';
 class ProductItem extends React.Component {
   render() {
     const {item, deleteProduct, selectProduct} = this.props;
-
+    // eslint-disable-next-line no-undef
     onPress = () => {
       deleteProduct(item);
     };
@@ -44,7 +44,7 @@ class ProductItem extends React.Component {
           </Text>
         </View>
 
-        <DeleteProductItemButton onPress={onPress} />
+        <DeleteProductItemButton onPress={() => deleteProduct(item)} />
       </View>
     );
   }

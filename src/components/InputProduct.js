@@ -1,20 +1,11 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {
-  Text,
-  TextInput,
-  View,
-  TouchableOpacity,
-  Dimensions,
-} from 'react-native';
-
-class AddProductForm extends React.Component {
+import {TextInput, View, Dimensions} from 'react-native';
+class InputProduct extends React.Component {
   render() {
-    const {addProduct, updateNameProduct, productName} = this.props;
+    const {updateProductName, productName} = this.props;
     const {height} = Dimensions.get('window');
 
-    onPress = () => {
-      addProduct();
-    };
     return (
       <View
         style={{
@@ -30,7 +21,7 @@ class AddProductForm extends React.Component {
         }}>
         <TextInput
           style={{
-            flex: 6,
+            flex: 1,
             borderRadius: 25,
             paddingLeft: 25,
             paddingRight: 25,
@@ -40,30 +31,13 @@ class AddProductForm extends React.Component {
             borderColor: '#ececec',
             borderWidth: 1,
           }}
-          onChangeText={updateNameProduct}
+          onChangeText={updateProductName}
           value={productName}
+          autoFocus={true}
         />
-
-        <TouchableOpacity
-          style={{
-            height: 50,
-            width: 50,
-            borderRadius: 25,
-            backgroundColor: '#f75d5d',
-          }}
-          onPress={onPress}>
-          <Text
-            style={{
-              fontSize: 35,
-              textAlign: 'center',
-              color: 'white',
-            }}>
-            +
-          </Text>
-        </TouchableOpacity>
       </View>
     );
   }
 }
 
-export default AddProductForm;
+export default InputProduct;
